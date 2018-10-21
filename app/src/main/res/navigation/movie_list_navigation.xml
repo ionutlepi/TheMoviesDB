@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation android:id="@+id/movie_list_navigation"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@id/movieList">
+
+    <fragment
+            android:id="@+id/movieList"
+            android:name="com.ionutlepi.movies.ui.movielist.MovieListFragment"
+            android:label="movieList"
+            tools:layout="@layout/f_movie_list">
+        <action
+                android:id="@+id/action_available_rooms_to_chat_messages"
+                app:destination="@id/movieDetails"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/movieDetails"
+            android:name="com.ionutlepi.movies.ui.moviedetails.MovieDetailsFragment"
+            android:label="movie details"
+            tools:layout="@layout/f_movie_details">
+        <argument
+            android:name="movie" />
+    </fragment>
+
+</navigation>

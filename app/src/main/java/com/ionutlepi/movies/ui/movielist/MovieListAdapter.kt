@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import com.ionutlepi.movies.R
 import com.ionutlepi.movies.models.Movie
-
-import kotlinx.android.synthetic.main.movie_list_item.view.*
-import kotlinx.android.synthetic.main.v_movie_list_single_item.view.*
+import kotlinx.android.synthetic.main.movie_list_item.view.first
+import kotlinx.android.synthetic.main.movie_list_item.view.second
+import kotlinx.android.synthetic.main.v_movie_list_single_item.view.moviePoster
 
 
 class MovieListAdapter(
-    var list: MutableList<Movie> = mutableListOf(),
+    private var list: MutableList<Movie> = mutableListOf(),
     private val navigationController: NavController,
     private var columnCount: Int = 2
 ) : RecyclerView.Adapter<MovieListAdapter.MovieListItem>() {
@@ -64,21 +64,34 @@ class MovieListAdapter(
         fun bindView(first: Movie, second: Movie? = null) {
             //TODO: this needs refactor to support multiple columns
             itemView.first.moviePoster.setImageURI(first.getMoviePosterUrl())
-            itemView.first.setOnClickListener(MovieItemClickListener(first, navigationController))
+            itemView.first.setOnClickListener(
+                MovieItemClickListener(
+                    first,
+                    navigationController
+                )
+            )
             if(second == null) {
                 itemView.second.visibility = View.INVISIBLE //we want to maintain the space occupied for constrain layout rules
             } else {
                 itemView.second.moviePoster.setImageURI(second.getMoviePosterUrl())
-                itemView.second.setOnClickListener(MovieItemClickListener(second, navigationController))
+                itemView.second.setOnClickListener(
+                    MovieItemClickListener(
+                        second,
+                        navigationController
+                    )
+                )
            }
         }
     }
 
-    private class MovieItemClickListener(private val movie: Movie, private val navigationController: NavController): View.OnClickListener {
+    private class MovieItemClickListener(
+        private val movie: Movie,
+        private val navigationController: NavController
+    ) : View.OnClickListener {
         override fun onClick(p0: View?) {
             val data = Bundle()
             data.putSerializable("movie",movie)
-            navigationController.navigate(R.id.movieDetails, data)
+            navigationController.navigate(R.id.movieDetails, data, null)
         }
 
     }

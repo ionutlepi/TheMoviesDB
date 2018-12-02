@@ -16,6 +16,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:placeholderImage="@drawable/ic_file_download_green_24dp"
             fresco:actualImageScaleType="focusCrop"
+            android:transitionName="poster"
             />
 
 </android.support.constraint.ConstraintLayout>

@@ -12,8 +12,7 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/poster"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:transitionName="poster"/>
+        android:layout_height="260dp"/>
 
 
     <TextView

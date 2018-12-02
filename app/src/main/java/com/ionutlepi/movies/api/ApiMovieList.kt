@@ -1,6 +1,6 @@
 package com.ionutlepi.movies.api
 
-import com.ionutlepi.movies.Movie
+import com.ionutlepi.movies.models.Movie
 import com.squareup.moshi.Json
 
 

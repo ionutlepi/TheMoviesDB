@@ -3,8 +3,6 @@ package com.ionutlepi.movies.ui.moviedetails
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.view.MenuItemCompat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -16,19 +14,21 @@ import com.facebook.drawee.backends.pipeline.info.ImagePerfDataListener
 import com.facebook.drawee.backends.pipeline.info.ImagePerfUtils
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.ionutlepi.movies.HomeActivity
-import com.ionutlepi.movies.Movie
 
 import com.ionutlepi.movies.R
-import kotlinx.android.synthetic.main.f_movie_details.*
+import com.ionutlepi.movies.formmatForDisplay
+import com.ionutlepi.movies.models.Movie
+import kotlinx.android.synthetic.main.f_movie_details_ml.poster
+import kotlinx.android.synthetic.main.f_movie_details_ml.releasedDate
+import kotlinx.android.synthetic.main.f_movie_details_ml.synopsis
+import timber.log.Timber
 
 class MovieDetailsFragment : Fragment() {
 
 
     private val logImagePerf = object: ImagePerfDataListener {
         override fun onImageLoadStatusUpdated(imagePerfData: ImagePerfData?, imageLoadStatus: Int) {
-
-            Log.d("ImagePerf",
-                "state=${ImagePerfUtils.toString(imageLoadStatus)}, data=${imagePerfData?.createDebugString()}")
+            Timber.d("ImagePerf state=${ImagePerfUtils.toString(imageLoadStatus)}, data=${imagePerfData?.createDebugString()}")
         }
 
         override fun onImageVisibilityUpdated(imagePerfData: ImagePerfData?, visibilityState: Int) {
@@ -41,7 +41,7 @@ class MovieDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.f_movie_details, container, false)
+        return inflater.inflate(R.layout.f_movie_details_ml, container, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -64,6 +64,7 @@ class MovieDetailsFragment : Fragment() {
                 .setAutoPlayAnimations(true)
                 .setPerfDataListener(logImagePerf)
                 .build()
+            releasedDate.text = released.formmatForDisplay()
         }
     }
 

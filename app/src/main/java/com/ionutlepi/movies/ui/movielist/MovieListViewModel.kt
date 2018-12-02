@@ -4,15 +4,17 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
-import com.ionutlepi.movies.Movie
 import com.ionutlepi.movies.api.ApiMovieList
-import com.ionutlepi.movies.api.movieDbClient
+import com.ionutlepi.movies.api.MovieDbClientProvider
+import com.ionutlepi.movies.api.TheMovieDB
+import com.ionutlepi.movies.models.Movie
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.concurrent.atomic.AtomicBoolean
 
-class MovieListViewModel : ViewModel() {
+class MovieListViewModel(private val movieDbClient: TheMovieDB = MovieDbClientProvider.get()) :
+    ViewModel() {
     private var movieList: MutableLiveData<List<Movie>>? = null
     var pagingMovieList: MutableLiveData<List<Movie>> = MutableLiveData()
     var currentPage = 1

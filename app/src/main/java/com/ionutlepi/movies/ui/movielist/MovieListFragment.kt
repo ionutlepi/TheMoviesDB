@@ -12,7 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ionutlepi.movies.HomeActivity
-import com.ionutlepi.movies.Movie
+import com.ionutlepi.movies.models.Movie
 import com.ionutlepi.movies.R
 import kotlinx.android.synthetic.main.f_movie_list.movieList
 import android.support.v7.widget.SearchView

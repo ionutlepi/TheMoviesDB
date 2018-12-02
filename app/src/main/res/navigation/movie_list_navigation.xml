@@ -23,7 +23,7 @@
             android:id="@+id/movieDetails"
             android:name="com.ionutlepi.movies.ui.moviedetails.MovieDetailsFragment"
             android:label="movie details"
-            tools:layout="@layout/f_movie_details">
+            tools:layout="@layout/f_movie_details_ml">
         <argument
             android:name="movie" />
     </fragment>

@@ -4,6 +4,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 import okhttp3.OkHttpClient
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Rfc3339DateJsonAdapter
+import retrofit2.Call
+import retrofit2.Response
+import timber.log.Timber
+import java.util.Date
 
 
 const val apiProtocol = "https"
@@ -30,11 +36,23 @@ val httpClient: OkHttpClient = OkHttpClient.Builder().addInterceptor { chain ->
     val request = requestBuilder.build()
     chain.proceed(request)
 }.build()
-
+private var moshi = Moshi.Builder()
+    .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
+    .build()
 val movieDbRetrofitProvider: Retrofit = Retrofit.Builder()
     .baseUrl("$apiProtocol://$apiUrl/$apiVersion/")
-    .addConverterFactory(MoshiConverterFactory.create())
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
     .client(httpClient)
     .build()
 
-val movieDbClient = movieDbRetrofitProvider.create(TheMovieDB::class.java)
+object MovieDbClientProvider {
+    fun get(): TheMovieDB = movieDbRetrofitProvider.create(TheMovieDB::class.java)
+}
+
+fun <T> errorHandleApiCalls(call: Call<T>, throwable: Throwable ) {
+    Timber.w(throwable)
+}
+
+fun <T> handleCallFailure(call: Call<T>, response: Response<T>) {
+    Timber.w(response.toString())
+}

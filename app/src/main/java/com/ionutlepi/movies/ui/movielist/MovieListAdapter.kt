@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
-import com.ionutlepi.movies.Movie
 import com.ionutlepi.movies.R
+import com.ionutlepi.movies.models.Movie
 
 import kotlinx.android.synthetic.main.movie_list_item.view.*
 import kotlinx.android.synthetic.main.v_movie_list_single_item.view.*

@@ -4,8 +4,8 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.ionutlepi.movies.api.MovieDbClientProvider
 import com.ionutlepi.movies.api.TheMovieDB
-import com.ionutlepi.movies.api.errorHandleApiCalls
 import com.ionutlepi.movies.api.handleCallFailure
+import com.ionutlepi.movies.api.handleResponseFailure
 import com.ionutlepi.movies.models.MovieDetails
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,14 +19,14 @@ class MovieDetailsLiveViewModel(private val movieDbClient: TheMovieDB = MovieDbC
         val call = movieDbClient.movieDetails(id)
         call.enqueue(object : Callback<MovieDetails> {
             override fun onFailure(call: Call<MovieDetails>, t: Throwable) {
-                errorHandleApiCalls(call , t)
+                handleCallFailure(call , t)
             }
 
             override fun onResponse(call: Call<MovieDetails>, response: Response<MovieDetails>) {
                 if(response.isSuccessful) {
                     movieLiveData.postValue(response.body())
                 } else {
-                    handleCallFailure(call, response)
+                    handleResponseFailure(call, response)
                 }
             }
         })

@@ -8,7 +8,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.cache.MemoryCacheParams
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import android.os.StrictMode
-
+import timber.log.Timber
 
 
 class MovieApplication: Application() {
@@ -47,7 +47,7 @@ class MovieApplication: Application() {
                     .penaltyLog()
                     .build()
             )
-
+            Timber.plant(Timber.DebugTree())
         }
     }
 }

@@ -3,24 +3,23 @@ package com.ionutlepi.movies.ui.movielist
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ionutlepi.movies.HomeActivity
-import com.ionutlepi.movies.models.Movie
 import com.ionutlepi.movies.R
+import com.ionutlepi.movies.models.Movie
 import kotlinx.android.synthetic.main.f_movie_list.movieList
-import android.support.v7.widget.SearchView
-import android.nfc.tech.MifareUltralight.PAGE_SIZE
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-
-
 
 
 class MovieListFragment : Fragment() {
@@ -54,41 +53,62 @@ class MovieListFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.f_movie_list, container, false)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.movie_list_menu, menu)
-        val item = menu.findItem(R.id.search)
-        val searchView = item.actionView as SearchView
-
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    private fun onSearchTextChanged(): SearchView.OnQueryTextListener {
+        return object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                if(!query.isBlank()) {
+                if (!query.isBlank()) {
                     viewModel.search(query)
                 }
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                //TODO: defer call using rxjava
-                if(!newText.isBlank()) {
-                    viewModel.search(newText)
-                } else {
-                    viewModel.loadMovies()
+                when {
+                    !newText.isBlank() -> viewModel.search(newText)
                 }
                 return false
             }
-        })
-        searchView.setOnClickListener { }
+        }
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return inflater.inflate(R.layout.f_movie_list, container, false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.movie_list_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+        val item = menu.findItem(R.id.search)
+        val searchView = item.actionView as SearchView
+        searchView.setOnQueryTextListener(onSearchTextChanged())
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val item = menu.findItem(R.id.search)
+        val searchView = item.actionView as SearchView
+        if (viewModel.activeQuery?.isNotBlank() == true) {
+            item.expandActionView()
+            searchView.clearFocus()
+            searchView.setQuery(viewModel.activeQuery, false)
+        }
+        item.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean = true
+
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                viewModel.loadMovies()
+                return true
+            }
+
+        })
     }
 
 
@@ -99,16 +119,17 @@ class MovieListFragment : Fragment() {
             adapter = movieListAdapter
             addOnScrollListener(recyclerViewOnScrollListener)
         }
-        viewModel.getMovies().observe(this, Observer{ movieList: List<Movie>? ->
-            if(movieList != null) {
+        viewModel.getMovies().observe(this, Observer { movieList: List<Movie>? ->
+            if (movieList != null) {
                 movieListAdapter.setData(movieList)
             }
         })
-        viewModel.pagingMovieList.observe(this, Observer{ movieList: List<Movie>? ->
-            if(movieList != null) {
+        viewModel.pagingMovieList.observe(this, Observer { movieList: List<Movie>? ->
+            if (movieList != null) {
                 movieListAdapter.addData(movieList)
             }
         })
+
     }
 
 }

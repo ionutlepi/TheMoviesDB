@@ -49,10 +49,10 @@ object MovieDbClientProvider {
     fun get(): TheMovieDB = movieDbRetrofitProvider.create(TheMovieDB::class.java)
 }
 
-fun <T> errorHandleApiCalls(call: Call<T>, throwable: Throwable ) {
+fun <T> handleCallFailure(call: Call<T>, throwable: Throwable ) {
     Timber.w(throwable)
 }
 
-fun <T> handleCallFailure(call: Call<T>, response: Response<T>) {
+fun <T> handleResponseFailure(call: Call<T>, response: Response<T>) {
     Timber.w(response.toString())
 }

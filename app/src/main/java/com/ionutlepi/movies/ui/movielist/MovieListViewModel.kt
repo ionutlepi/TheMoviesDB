@@ -3,10 +3,11 @@ package com.ionutlepi.movies.ui.movielist
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.util.Log
 import com.ionutlepi.movies.api.ApiMovieList
 import com.ionutlepi.movies.api.MovieDbClientProvider
 import com.ionutlepi.movies.api.TheMovieDB
+import com.ionutlepi.movies.api.handleCallFailure
+import com.ionutlepi.movies.api.handleResponseFailure
 import com.ionutlepi.movies.models.Movie
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,11 +21,11 @@ class MovieListViewModel(private val movieDbClient: TheMovieDB = MovieDbClientPr
     var currentPage = 1
     private val loadingData: AtomicBoolean = AtomicBoolean(false)
     private var searchCallReference: Call<ApiMovieList>? = null
-    private var activeQuery: String? = null
+    var activeQuery: String? = null
 
     private val apiCB = object: Callback<ApiMovieList>{
         override fun onFailure(call: Call<ApiMovieList>, t: Throwable) {
-            Log.w("MovieListViewModel", t)
+            handleCallFailure(call, t)
             loadingData.set(false)
         }
 
@@ -34,7 +35,7 @@ class MovieListViewModel(private val movieDbClient: TheMovieDB = MovieDbClientPr
                 currentPage = 1
                 movieList?.postValue(body.results)
             } else {
-                Log.w("MovieListViewModel", response.message())
+                handleResponseFailure(call, response)
             }
         }
 
@@ -83,7 +84,7 @@ class MovieListViewModel(private val movieDbClient: TheMovieDB = MovieDbClientPr
 
         call.enqueue(object: Callback<ApiMovieList>{
             override fun onFailure(call: Call<ApiMovieList>, t: Throwable) {
-                Log.w("MovieListViewModel", t)
+                handleCallFailure(call, t)
                 loadingData.set(false)
             }
 
@@ -93,7 +94,7 @@ class MovieListViewModel(private val movieDbClient: TheMovieDB = MovieDbClientPr
                     pagingMovieList.postValue(body.results)
                     loadingData.set(false)
                 } else {
-                    Log.w("MovieListViewModel", response.message())
+                    handleResponseFailure(call, response)
                 }
             }
 

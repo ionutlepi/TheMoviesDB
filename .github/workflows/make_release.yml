@@ -20,7 +20,8 @@ jobs:
       - name: Test and Lint
           run: ./gradlew tDUT lintRelease
       - name: Assemble
-        run: ./gradlew assembleRelease
+        run: |
+          ./gradlew assembleRelease
       - name: Create Pre-release
         id: create_release
         uses: actions/create-release@v1
@@ -40,4 +41,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./app/build/outputs/apk/release/app-release-unsigned.apk
           asset_name: app-release-unsigned.apk
-          asset_content_type: application/vnd.android.package-archive
+          asset_content_type: application/vnd.android.git package-archive

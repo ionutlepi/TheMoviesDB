@@ -6,14 +6,14 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@+id/poster"
+            android:id="@+id/poster_start"
             android:layout_width="match_parent"
             android:layout_height="260dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"/>
         <Constraint
-            android:id="@+id/synopsis"
+            android:id="@+id/synopsis_start"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/one_unit"
@@ -24,7 +24,7 @@
             motion:layout_constraintTop_toBottomOf="@+id/releasedLbl"
             />
         <Constraint
-            android:id="@+id/releasedLbl"
+            android:id="@+id/releasedLbl_start"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/one_unit"
@@ -32,7 +32,7 @@
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/poster"/>
         <Constraint
-            android:id="@+id/releasedDate"
+            android:id="@+id/releasedDate_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/one_unit"
@@ -45,7 +45,7 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/poster"
+            android:id="@+id/poster_end"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_marginStart="@dimen/one_unit"
@@ -53,7 +53,7 @@
             motion:layout_constraintTop_toTopOf="parent"
             />
         <Constraint
-            android:id="@+id/synopsis"
+            android:id="@+id/synopsis_end"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/one_unit"
@@ -61,10 +61,10 @@
             android:layout_marginTop="@dimen/one_unit"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/poster"
+            motion:layout_constraintTop_toBottomOf="@id/poster"
             />
         <Constraint
-            android:id="@+id/releasedLbl"
+            android:id="@+id/releasedLbl_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/one_unit"
@@ -74,7 +74,7 @@
             motion:layout_constraintTop_toTopOf="parent"
             />
         <Constraint
-            android:id="@+id/releasedDate"
+            android:id="@+id/releasedDate_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/one_unit"
@@ -90,7 +90,7 @@
         motion:constraintSetEnd="@+id/end"
         motion:duration="2000">
         <OnSwipe
-            motion:touchAnchorId="@+id/poster"
+            motion:touchAnchorId="@id/poster"
             motion:touchAnchorSide="right"
             motion:dragDirection="dragUp"/>
         <KeyFrameSet>
@@ -98,7 +98,7 @@
                 motion:keyPositionType="parentRelative"
                 motion:percentY="0.35"
                 motion:framePosition="50"
-                motion:motionTarget="@+id/synopsis"/>
+                motion:motionTarget="@id/synopsis"/>
             <KeyPosition
                 motion:keyPositionType="parentRelative"
                 motion:percentY="0.35"

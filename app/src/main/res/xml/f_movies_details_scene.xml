@@ -2,33 +2,7 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:motion="http://schemas.android.com/apk/res-auto">
 
-    <Transition
-        motion:constraintSetStart="@+id/start"
-        motion:constraintSetEnd="@+id/end"
-        motion:duration="2000">
-        <OnSwipe
-            motion:touchAnchorId="@+id/poster"
-            motion:touchAnchorSide="right"
-            motion:dragDirection="dragUp"
-            motion:interpolator="linear"/>
-        <KeyFrameSet>
-            <KeyPosition
-                motion:keyPositionType="parentRelative"
-                motion:percentY="0.35"
-                motion:framePosition="50"
-                motion:target="@+id/synopsis"/>
-            <KeyPosition
-                motion:keyPositionType="parentRelative"
-                motion:percentY="0.35"
-                motion:framePosition="50"
-                motion:target="@+id/releasedLbl"/>
-            <KeyPosition
-                motion:keyPositionType="parentRelative"
-                motion:percentY="0.35"
-                motion:framePosition="50"
-                motion:target="@+id/releasedDate"/>
-        </KeyFrameSet>
-    </Transition>
+
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
@@ -110,5 +84,32 @@
             motion:layout_constraintStart_toEndOf="@id/releasedLbl"
             motion:layout_constraintTop_toTopOf="parent"/>
     </ConstraintSet>
+
+    <Transition
+        motion:constraintSetStart="@+id/start"
+        motion:constraintSetEnd="@+id/end"
+        motion:duration="2000">
+        <OnSwipe
+            motion:touchAnchorId="@+id/poster"
+            motion:touchAnchorSide="right"
+            motion:dragDirection="dragUp"/>
+        <KeyFrameSet>
+            <KeyPosition
+                motion:keyPositionType="parentRelative"
+                motion:percentY="0.35"
+                motion:framePosition="50"
+                motion:motionTarget="@+id/synopsis"/>
+            <KeyPosition
+                motion:keyPositionType="parentRelative"
+                motion:percentY="0.35"
+                motion:framePosition="50"
+                motion:motionTarget="@+id/releasedLbl"/>
+            <KeyPosition
+                motion:keyPositionType="parentRelative"
+                motion:percentY="0.35"
+                motion:framePosition="50"
+                motion:motionTarget="@+id/releasedDate"/>
+        </KeyFrameSet>
+    </Transition>
 
 </MotionScene>

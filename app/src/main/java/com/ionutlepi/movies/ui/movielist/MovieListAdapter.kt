@@ -1,16 +1,15 @@
 package com.ionutlepi.movies.ui.movielist
 
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
+import androidx.recyclerview.widget.RecyclerView
 import com.ionutlepi.movies.R
 import com.ionutlepi.movies.models.Movie
-import kotlinx.android.synthetic.main.movie_list_item.view.first
-import kotlinx.android.synthetic.main.movie_list_item.view.second
-import kotlinx.android.synthetic.main.v_movie_list_single_item.view.moviePoster
+import kotlinx.android.synthetic.main.movie_list_item.view.*
+import kotlinx.android.synthetic.main.v_movie_list_single_item.view.*
 
 
 class MovieListAdapter(

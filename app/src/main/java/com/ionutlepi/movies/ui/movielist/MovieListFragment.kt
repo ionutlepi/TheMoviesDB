@@ -1,25 +1,25 @@
 package com.ionutlepi.movies.ui.movielist
 
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ionutlepi.movies.HomeActivity
 import com.ionutlepi.movies.R
 import com.ionutlepi.movies.models.Movie
-import kotlinx.android.synthetic.main.f_movie_list.movieList
+import kotlinx.android.synthetic.main.f_movie_list.*
 
 
 class MovieListFragment : Fragment() {

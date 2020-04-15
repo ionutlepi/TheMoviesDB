@@ -1,9 +1,9 @@
 package com.ionutlepi.movies
 
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 
 
 class HomeActivity : AppCompatActivity() {

@@ -1,13 +1,13 @@
 package com.ionutlepi.movies.ui.moviedetails
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.backends.pipeline.info.ImagePerfData
 import com.facebook.drawee.backends.pipeline.info.ImagePerfDataListener
@@ -17,9 +17,7 @@ import com.ionutlepi.movies.HomeActivity
 import com.ionutlepi.movies.R
 import com.ionutlepi.movies.formmatForDisplay
 import com.ionutlepi.movies.models.Movie
-import kotlinx.android.synthetic.main.f_movie_details_ml.poster
-import kotlinx.android.synthetic.main.f_movie_details_ml.releasedDate
-import kotlinx.android.synthetic.main.f_movie_details_ml.synopsis
+import kotlinx.android.synthetic.main.f_movie_details_ml.*
 import timber.log.Timber
 
 class MovieDetailsFragment : Fragment() {

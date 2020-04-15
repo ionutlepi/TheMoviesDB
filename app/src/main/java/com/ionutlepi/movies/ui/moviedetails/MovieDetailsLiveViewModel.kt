@@ -1,7 +1,7 @@
 package com.ionutlepi.movies.ui.moviedetails
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.ionutlepi.movies.api.MovieDbClientProvider
 import com.ionutlepi.movies.api.TheMovieDB
 import com.ionutlepi.movies.api.handleCallFailure

@@ -28,6 +28,7 @@ ext {
     fresco = "1.11.0"
     paging = "1.0.1"
     timber =  "4.7.1"
+    androidX = "2.0.0"
 }
 
 allprojects {

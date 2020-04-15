@@ -7,7 +7,7 @@ on:
 name: Create Release Draft And Attach apk
 
 jobs:
-  build:
+  build_release:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
@@ -17,8 +17,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Build with Gradle
-        run: ./gradlew buildRelease
+      - name: Test and Lint
+          run: ./gradlew tDUT lintRelease
+      - name: Assemble
+        run: ./gradlew assembleRelease
       - name: Create Pre-release
         id: create_release
         uses: actions/create-release@v1
